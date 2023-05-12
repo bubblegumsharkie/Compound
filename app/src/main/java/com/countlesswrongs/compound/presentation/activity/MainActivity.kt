@@ -1,4 +1,4 @@
-package com.countlesswrongs.compound.presentation
+package com.countlesswrongs.compound.presentation.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
