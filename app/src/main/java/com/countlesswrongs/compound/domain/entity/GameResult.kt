@@ -1,10 +1,12 @@
 package com.countlesswrongs.compound.domain.entity
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class GameResult(
     val didWin: Boolean,
     val amountOfRightAnswers: Int,
     val countOfQuestions: Int,
     val gameSettings: GameSettings
-) : Serializable
+) : Parcelable
