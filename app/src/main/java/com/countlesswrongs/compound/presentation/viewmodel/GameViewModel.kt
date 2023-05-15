@@ -131,7 +131,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun formatTime(p0: Long): String {
-        val seconds = p0 * MILLIS_IN_SECOND
+        val seconds = p0 / MILLIS_IN_SECOND
         val minutes = seconds / SECONDS_IN_MINUTE
         val secondsLeft = seconds - (minutes * SECONDS_IN_MINUTE)
         return String.format("%02d:%02d", minutes, secondsLeft)
