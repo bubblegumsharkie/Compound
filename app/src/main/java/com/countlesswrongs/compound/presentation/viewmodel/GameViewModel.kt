@@ -146,6 +146,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
             enoughToWinAmountOfCorrectAnswers.value == true && enoughToWinPercentageOfCorrectAnswers.value == true,
             amountOfCorrectAnswers,
             amountOfQuestions,
+            percentageOfCorrectAnswers.value ?: 0,
             gameSettings
         )
     }
