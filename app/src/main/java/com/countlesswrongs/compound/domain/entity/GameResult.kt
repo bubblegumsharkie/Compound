@@ -8,5 +8,6 @@ data class GameResult(
     val didWin: Boolean,
     val amountOfRightAnswers: Int,
     val amountOfQuestions: Int,
+    val percentageOfRightAnswers: Int,
     val gameSettings: GameSettings
 ) : Parcelable
