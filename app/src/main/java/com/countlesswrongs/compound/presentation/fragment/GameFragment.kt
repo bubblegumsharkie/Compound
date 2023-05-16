@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.countlesswrongs.compound.databinding.FragmentGameBinding
 import com.countlesswrongs.compound.domain.entity.GameResult
-import com.countlesswrongs.compound.domain.entity.Level
 import com.countlesswrongs.compound.presentation.viewmodel.GameViewModel
 import com.countlesswrongs.compound.presentation.viewmodel.GameViewModelFactory
 
@@ -43,10 +42,6 @@ class GameFragment : Fragment() {
     private var _binding: FragmentGameBinding? = null
     private val binding: FragmentGameBinding
         get() = _binding ?: throw RuntimeException("FragmentGameBinding is NULL")
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -129,19 +124,6 @@ class GameFragment : Fragment() {
         findNavController().navigate(
             GameFragmentDirections.actionGameFragmentToGameFinishedFragment(gameResult)
         )
-    }
-
-    companion object {
-        const val NAME = "GameFragment"
-        const val KEY_LEVEL = "level"
-
-        fun newInstance(level: Level): GameFragment {
-            return GameFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(KEY_LEVEL, level)
-                }
-            }
-        }
     }
 
 }

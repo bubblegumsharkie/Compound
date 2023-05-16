@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.countlesswrongs.compound.R
 import com.countlesswrongs.compound.databinding.FragmentGameFinishedBinding
-import com.countlesswrongs.compound.domain.entity.GameResult
 
 
 class GameFinishedFragment : Fragment() {
@@ -23,10 +22,6 @@ class GameFinishedFragment : Fragment() {
     private var _binding: FragmentGameFinishedBinding? = null
     private val binding: FragmentGameFinishedBinding
         get() = _binding ?: throw RuntimeException("FragmentGameFinishedBinding is NULL")
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -86,19 +81,6 @@ class GameFinishedFragment : Fragment() {
 
     private fun retryGame() {
         findNavController().popBackStack()
-    }
-
-    companion object {
-
-        const val KEY_GAME_RESULT = "game_result"
-
-        fun newInstance(gameResult: GameResult): GameFinishedFragment {
-            return GameFinishedFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(KEY_GAME_RESULT, gameResult)
-                }
-            }
-        }
     }
 
 }
