@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.countlesswrongs.compound.R
 import com.countlesswrongs.compound.databinding.FragmentGameFinishedBinding
 import com.countlesswrongs.compound.domain.entity.GameResult
@@ -14,7 +15,10 @@ import com.countlesswrongs.compound.domain.entity.GameResult
 
 class GameFinishedFragment : Fragment() {
 
-    private lateinit var gameResult: GameResult
+    private val args by navArgs<GameFinishedFragmentArgs>()
+    private val gameResult by lazy {
+        args.gameResult
+    }
 
     private var _binding: FragmentGameFinishedBinding? = null
     private val binding: FragmentGameFinishedBinding
@@ -22,13 +26,6 @@ class GameFinishedFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        parseArgs()
-    }
-
-    private fun parseArgs() {
-        requireArguments().getParcelable<GameResult>(KEY_GAME_RESULT)?.let {
-            gameResult = it
-        }
     }
 
     override fun onCreateView(
