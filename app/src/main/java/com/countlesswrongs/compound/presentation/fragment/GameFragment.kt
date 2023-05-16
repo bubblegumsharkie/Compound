@@ -9,22 +9,23 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory
 import com.countlesswrongs.compound.R
 import com.countlesswrongs.compound.databinding.FragmentGameBinding
 import com.countlesswrongs.compound.domain.entity.GameResult
 import com.countlesswrongs.compound.domain.entity.Level
 import com.countlesswrongs.compound.presentation.viewmodel.GameViewModel
+import com.countlesswrongs.compound.presentation.viewmodel.GameViewModelFactory
 
 
 class GameFragment : Fragment() {
 
     private lateinit var level: Level
+
+    private val viewModelFactory: GameViewModelFactory by lazy {
+        GameViewModelFactory(level, requireActivity().application)
+    }
     private val viewModel: GameViewModel by lazy {
-        ViewModelProvider(
-            this,
-            AndroidViewModelFactory.getInstance(requireActivity().application)
-        )[GameViewModel::class.java]
+        ViewModelProvider(this, viewModelFactory)[GameViewModel::class.java]
     }
 
     private val tvOptions by lazy {
@@ -58,7 +59,6 @@ class GameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeViewModel()
-        viewModel.startGame(level)
         setOnOptionsClickListeners()
     }
 
