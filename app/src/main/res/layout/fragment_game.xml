@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.countlesswrongs.compound.presentation.viewmodel.GameViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -13,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:text="@{viewModel.formattedTime}"
             android:textColor="@color/teal_700"
             android:textSize="32sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,6 +42,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_timer"
+            app:setNumberAsString="@{viewModel.question.sum}"
             tools:text="1" />
 
         <TextView
@@ -52,6 +61,7 @@
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_question"
+            app:setNumberAsString="@{viewModel.question.visibleNumber}"
             tools:text="7" />
 
         <TextView
@@ -77,9 +87,11 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="32dp"
+            android:text="@{viewModel.progressAnswers}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_first_number"
+            app:setColorRunningResults="@{viewModel.enoughToWinAmountOfCorrectAnswers}"
             tools:text="@string/tv_results" />
 
         <TextView
@@ -88,10 +100,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_green_light"
+            android:text="@{viewModel.question.options.get(0).toString()}"
             app:layout_constraintBottom_toTopOf="@id/tv_option_4"
             app:layout_constraintEnd_toStartOf="@id/tv_option_5"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
+            app:setOnOptionClickListener="@{(option) -> viewModel.userPickedAnswer(option)}"
             tools:text="1" />
 
         <TextView
@@ -100,9 +114,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_orange_light"
+            android:text="@{viewModel.question.options.get(1).toString()}"
             app:layout_constraintBottom_toTopOf="@id/tv_option_4"
             app:layout_constraintEnd_toStartOf="@id/tv_option_6"
             app:layout_constraintStart_toEndOf="@id/tv_option_4"
+            app:setOnOptionClickListener="@{(option) -> viewModel.userPickedAnswer(option)}"
             tools:text="2" />
 
         <TextView
@@ -111,9 +127,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_purple"
+            android:text="@{viewModel.question.options.get(2).toString()}"
             app:layout_constraintBottom_toTopOf="@id/tv_option_4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_option_5"
+            app:setOnOptionClickListener="@{(option) -> viewModel.userPickedAnswer(option)}"
             tools:text="3" />
 
         <TextView
@@ -122,10 +140,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_blue_light"
+            android:text="@{viewModel.question.options.get(3).toString()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tv_option_5"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
+            app:setOnOptionClickListener="@{(option) -> viewModel.userPickedAnswer(option)}"
             tools:text="4" />
 
         <TextView
@@ -134,9 +154,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_red_light"
+            android:text="@{viewModel.question.options.get(4).toString()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tv_option_6"
             app:layout_constraintStart_toEndOf="@id/tv_option_4"
+            app:setOnOptionClickListener="@{(option) -> viewModel.userPickedAnswer(option)}"
             tools:text="5" />
 
         <TextView
@@ -145,9 +167,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_blue_bright"
+            android:text="@{viewModel.question.options.get(5).toString()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_option_5"
+            app:setOnOptionClickListener="@{(option) -> viewModel.userPickedAnswer(option)}"
             tools:text="6" />
 
         <ProgressBar
@@ -157,10 +181,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:max="100"
+            android:secondaryProgress="@{viewModel.minPercentage}"
             android:secondaryProgressTint="@android:color/background_dark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_running_results" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_running_results"
+            app:setProgressBarColor="@{viewModel.enoughToWinPercentageOfCorrectAnswers}"
+            app:setProgressBarProgress="@{viewModel.percentageOfCorrectAnswers}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
